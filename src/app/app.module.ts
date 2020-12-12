@@ -7,6 +7,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LogInComponent } from './user/log-in/log-in.component';
 import { HttpClientModule } from '@angular/common/http';
 
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+
 import { OverlayModule } from '@angular/cdk/overlay';
 import { CdkTreeModule } from '@angular/cdk/tree';
 import { PortalModule } from '@angular/cdk/portal';
@@ -42,6 +45,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -88,7 +92,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   MatTooltipModule,
 
   FormsModule,
-  ReactiveFormsModule
+  ReactiveFormsModule,
+  AngularFireModule.initializeApp(environment.firebaseConfig),
+  AngularFireDatabaseModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

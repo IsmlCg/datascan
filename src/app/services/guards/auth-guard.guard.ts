@@ -16,8 +16,7 @@ export class AuthGuardGuard implements CanActivate {
   constructor( private login: LoginService ) { }
 
   canActivate(): boolean { 
-    console.log( "this.login.isAuthenticated()" );
-    console.log( this.login.isAuthenticated() );
+    
     if ( !this.login.isAuthenticated() ) {
       return false;
     } else {

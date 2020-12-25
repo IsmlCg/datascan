@@ -46,6 +46,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { environment } from '../environments/environment';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { CrudService } from './services/firebase/crud.service';
 
 @NgModule({
   declarations: [
@@ -94,10 +96,11 @@ import { environment } from '../environments/environment';
   FormsModule,
   ReactiveFormsModule,
   AngularFireModule.initializeApp(environment.firebaseConfig),
+  AngularFirestoreModule,
   AngularFireDatabaseModule
 
   ],
-  providers: [],
+  providers: [ CrudService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

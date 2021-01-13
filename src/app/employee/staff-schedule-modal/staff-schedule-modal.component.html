@@ -1,0 +1,28 @@
+<mat-dialog-content class="mat-typography login-wrapper">
+    <h1>{{data.title}}</h1>
+    <form class="form">
+        <mat-form-field class="full-width">
+            <mat-label>computer number</mat-label>
+            <input matInput placeholder="computer number" [(ngModel)]="computer.computernumber" value="computer.computernumber" name="code">
+        </mat-form-field>
+        <mat-form-field class="full-width">
+            <mat-label>Row number</mat-label>
+            <mat-select [(value)]="computer.rownumber">
+              <mat-option value ="1">1</mat-option>
+              <mat-option value ="2">2</mat-option>
+              <mat-option value ="3">3</mat-option>
+            </mat-select>
+        </mat-form-field> 
+        <mat-form-field class="full-width">
+            <mat-label>Position</mat-label>
+            <mat-select [(value)]="computer.position">
+              <mat-option value ="start">Left</mat-option>
+              <mat-option value ="end">Right</mat-option>
+            </mat-select>
+        </mat-form-field>          
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-raised-button color="warn" (click)="close()" >Cancel</button>
+    <button mat-raised-button color="primary" (click)="save()" >Add</button>
+</mat-dialog-actions>

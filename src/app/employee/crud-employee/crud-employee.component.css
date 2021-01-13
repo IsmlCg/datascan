@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+mat-grid-tile {
+  background-color: lightblue;
+}
+
+h3 {
+  font-family: Verdana;
+}
+
+table {
+  width: 100%;
+}
+
+.button-row button,
+.button-row a {
+  margin-right: 8px;
+  line-height: 25px;
+}
+
+.container{
+  margin: 10px;
+}

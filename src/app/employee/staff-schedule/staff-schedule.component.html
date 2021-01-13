@@ -1,0 +1,19 @@
+<div class="content">
+  <button  (click)="openDialog( -1 );" mat-raised-button color="primary">Add</button>
+  <div class="data" fxFlexFill fxLayout="row wrap" fxLayoutAlign="space-between none">
+    <div fxFlex="8%"></div>
+    <div class="content" *ngFor="let row of rows; let i = index;" class="box-color" fxFlex="25%">
+        
+      <div class="button-row" fxLayout="row"  fxLayoutAlign="space-evenly end" >
+        {{row.key}}
+      </div>
+
+      <div class="button-row" fxLayout="column"  *ngFor="let item of row;" fxLayoutAlign="space-around {{item.position}}" >  
+        <button  mat-raised-button color="primary">
+          <mat-icon>desktop_windows</mat-icon>{{item.computernumber}}
+        </button>
+      </div> 
+    
+    </div>
+  </div>
+</div>

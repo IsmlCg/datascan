@@ -1,1 +1,40 @@
-<p>dashboard works!</p>
+
+<div cdkDropListGroup class="content">
+  <button  (click)="add();" mat-raised-button color="primary">add</button>
+  <hr>
+  <div fxLayout="row wrap">
+    <div class="button-row" fxFlex="13%"  fxFlex.xs="50%" *ngFor="let employee of employees;" 
+        fxLayoutAlign="space-around center" >
+      <div (cdkDropListDropped)="drop( $event );" cdkDropList  [id] = "''" [cdkDropListData]="employee" class="employee-list">
+          <div class="employees-list" cdkDrag>
+            <strong>{{employee.code}} - </strong>
+            {{employee.name + ' ' + employee.lastname }}
+          </div>
+        </div>
+    </div>
+  </div>
+  <hr>
+  <div class="data" fxLayout="row" fxLayoutAlign="space-around none" >
+    
+    <div *ngFor="let row of rows;let i = index;" class="row-employee-content" fxFlex="25%" fxFlex.xs="80%">
+      <h2 fxLayoutAlign="space-evenly center" class="mat-h2">{{row.key}}</h2>
+      
+      <div fxLayout="column"  *ngFor="let item of row;" 
+          fxLayoutAlign="space-around {{item.position}}" >
+          {{item.computernumber}}
+          <div cdkDropList class="employee-list"
+            [id] = "item.id" 
+            [cdkDropListData]="item" fxLayoutAlign="space-around none"
+            (cdkDropListDropped)="drop( $event );">
+            <div class="employee-box" cdkDrag>
+                <div class="employee-val">
+                  <strong *ngIf ="item.employee.code">{{item.employee.code}}</strong>
+                  {{item.employee.name + ' ' + item.employee.lastname }}
+                </div>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-printer-schedule></app-printer-schedule>

@@ -43,17 +43,32 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { DashboardComponent } from './dashboard/dashboard.component';
-
+import { MatDialogModule } from '@angular/material/dialog';
+import { CdkTableModule } from '@angular/cdk/table';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { CrudService } from './services/firebase/crud.service';
+import { CrudEmployeeComponent } from './employee/crud-employee/crud-employee.component';
+import { EmployeeModalComponent } from './employee/employee-modal/employee-modal.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { StaffScheduleComponent } from './employee/staff-schedule/staff-schedule.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { StaffScheduleModalComponent } from './employee/staff-schedule-modal/staff-schedule-modal.component';
+import { PrintScheduleComponent } from './dashboard/print-schedule/print-schedule.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     LogInComponent,
-    DashboardComponent
+    DashboardComponent,
+    CrudEmployeeComponent,
+    EmployeeModalComponent,
+    StaffScheduleComponent,
+    StaffScheduleModalComponent,
+    PrintScheduleComponent
   ],
   imports: [
     BrowserModule,
@@ -92,15 +107,24 @@ import { CrudService } from './services/firebase/crud.service';
   MatRadioModule,
   MatDatepickerModule,
   MatTooltipModule,
-
+  MatDialogModule,
+  MatSlideToggleModule,
+  CdkTableModule,
+  FlexLayoutModule,
+  DragDropModule,
+    
   FormsModule,
   ReactiveFormsModule,
   AngularFireModule.initializeApp(environment.firebaseConfig),
   AngularFirestoreModule,
-  AngularFireDatabaseModule
+  AngularFireDatabaseModule,
+
+  PrintScheduleComponent,
+
 
   ],
   providers: [ CrudService ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [EmployeeModalComponent]
 })
 export class AppModule { }

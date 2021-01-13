@@ -10,48 +10,50 @@ export interface Item { name: string; }
 @Injectable({
   providedIn: 'root'
 })
+
 export class CrudService {
   [x: string]: any;
 
-  private dbPath = '/users';
-  booksRef!: AngularFireList<any>;
-  bookRef!: AngularFireObject<any>;
-  constructor( private afs: AngularFirestore, private db: AngularFireDatabase) {
-    this.booksRef = db.list( this.dbPath );
-  }
+  private _path = '';
 
-  AddBook( user: User) {
-    this.booksRef.push({
-      id: user.id,
-      username: user.username,
-      password:user.password
-    })
+  constructor( private afs: AngularFirestore, private db: AngularFireDatabase) {
+    
+  }
+  
+  add( value: any ) {
+    this.db.list( this._path).push( value )
     .catch(error => {
       this.errorMgmt(error);
     })
   }
 
-  GetBookList() {
-    this.booksRef = this.db.list( this.dbPath, ref => ref.orderByChild('username').equalTo('ana') );
-    // this.booksRef = this.db.list( this.dbPath, {password:'ana',} );
-    return this.booksRef;
+  delete( key:string) {
+    return this.db.list( this._path ).remove( key );
+  }
+
+  getAll() {
+    return this.db.list( this._path );
   }
   
-  getFilter(){
-    
-    return this.afs.collection('users').snapshotChanges();
+  getFilter( name:string, val:string ){
+    return this.db.list( this._path, ref => ref.orderByChild( name ).equalTo( val ) );
   }
 
-  getDocsByParam( getParam:string, paramValue:string ) {
-    // var docRef = this.afs.collection( this.dbPath).ref;
-    // return docRef.where( getParam, '==', paramValue).get();
-
-    // return this.afs.collection( this.dbPath  ).snapshotChanges();
-    return this.afs.collection(this.dbPath).snapshotChanges();
+  getAllData() {
+    return this.afs.collection(this._path).snapshotChanges();
 
   }
 
-  create_NewStudent(record:object ) {
-    return this.afs.collection( 'users' ).add( record );
+  create( record:any ) {
+    return this.afs.collection( this._path ).add( record );
+  }
+
+  setPath( _path: string ){
+    this._path = _path;
+    this.ref = this.db.list( this._path );
+  }
+
+  update( key: string, value: any ){
+    return this.db.list( this._path ).update( key, value );
   }
 }

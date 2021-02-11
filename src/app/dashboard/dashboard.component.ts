@@ -120,7 +120,7 @@ export class DashboardComponent implements OnInit {
 
   upgradeComputerEmployee( row:number, key:string, newEmployee:any ){
     if ( !isNaN( row ) ) {
-      this.db.setPath( 'computers/row-' + (row + 1) );
+      this.db.setPath( 'computers/row-' + ( row + 1 ) );
       this.db.update( key, { employee:newEmployee });  
     }
     

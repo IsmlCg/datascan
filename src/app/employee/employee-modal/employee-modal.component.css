@@ -1,3 +1,13 @@
 .full-width {
   width: 100%;
 }
+.third-width {
+  width: 28%;
+
+  padding: 2px 10px;
+}
+
+.fourth-width {
+  width: 22%;
+  padding: 2px 10px;
+}

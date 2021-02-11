@@ -1,3 +1,4 @@
+import { Time } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
 
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -11,16 +12,15 @@ import { Employee } from './Employee';
   styleUrls: ['./employee-modal.component.css']
 })
 export class EmployeeModalComponent implements OnInit {
+  // scheduleweek
   
-  employee: Employee = 
-    {
-      name:'',
-      lastname:'',
-      code:'',
-      id:'',
-      active:true
-    };
-  
+  time = "08:00";
+  days: any = {
+    monday:{
+      start:"08:00",
+      end:"16:30"
+    }
+  };
   isnew:boolean = true;
   active:boolean = true;
   
@@ -30,6 +30,7 @@ export class EmployeeModalComponent implements OnInit {
       this.employee = data.data;
       this.isnew = false;
     }
+    
   }
 
   close() {
@@ -58,8 +59,85 @@ export class EmployeeModalComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  changeJob( newJob:string ) {
+    this.employee.days.monday.job = newJob;
+    this.employee.days.tuesday.job = newJob;
+    this.employee.days.wednesday.job = newJob;
+    this.employee.days.thursday.job = newJob;
+
+    this.employee.days.friday.job = newJob;
+    this.employee.days.saturday.job = newJob;
+    this.employee.days.sunday.job = newJob;
+  }
+
   onChange( $event: MatSlideToggleChange ) {
     this.active = $event.checked;
   }
 
+  changeHours( obj:any )
+  {
+    
+    if ( obj.status == 'enabled' ) {
+      obj.start = '08:00';
+      obj.end = '16:30';    
+    }else{
+      obj.start = '';
+      obj.end = '';      
+    }
+    
+  }
+  
+  employee: Employee = 
+  {
+    name:'',
+    lastname:'',
+    code:'',
+    id:'',
+    active:true,
+    job:'',
+    days:{
+      monday:{
+        start:"08:00",
+        end:"16:30",
+        status:"enabled",
+        job:""
+      },
+      tuesday:{
+        start:"08:00",
+        end:"16:30",
+        status:"enabled",
+        job:""
+      },
+      wednesday:{
+        start:"08:00",
+        end:"16:30",
+        status:"enabled",
+        job:""
+      },
+      thursday:{
+        start:"08:00",
+        end:"16:30",
+        status:"enabled",
+        job:""
+      },
+      friday:{
+        start:"08:00",
+        end:"16:30",
+        status:"enabled",
+        job:""
+      },
+      saturday:{
+        start:"",
+        end:"",
+        status:"day-off",
+        job:""
+      },
+      sunday:{
+        start:"",
+        end:"",
+        status:"day-off",
+        job:""
+      }    
+    }
+  };
 }

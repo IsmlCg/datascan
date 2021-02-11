@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+mat-grid-tile {
+  background-color: lightblue;
+}
+
+h3 {
+  font-family: Verdana;
+}
+
+table {
+  width: 100%;
+}
+td,th{
+    border-right-style: inset ;
+}
+
+.scan{
+  color: rgb(7, 6, 6);
+  background: #f7f7f7;
+}
+.default{
+    color: white;
+    background: #e9e505;
+  }
+
+.werehouse{
+    color: white;
+    background: #1b04e9;
+  }
+.container{
+  margin: 10px;
+}

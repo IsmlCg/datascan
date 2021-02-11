@@ -42,16 +42,18 @@ export class StaffScheduleComponent implements OnInit {
     this.rows[0].computers.push( {number:100, position:"start", username:"ana", usercode:"1234"} );
   }
 
-  openDialog( row:number ) {
+  openDialog( path:string, pc:any = null ) {
+    console.log( 'ini' )
+          console.log(pc)
     const dialogConfig = new MatDialogConfig();
     dialogConfig.data = {
       title:"Registar..!",
       data:null
     };
-    if ( row >= 0 ) {
+    if ( path != "" ) {
       dialogConfig.data = {
         title:"Edit..!",
-        // data:this.employees[ row ]
+        data: pc
       };
     }
     
@@ -65,9 +67,17 @@ export class StaffScheduleComponent implements OnInit {
           this.db.setPath( 'computers/row-'+ values.value.rownumber );
           this.db.add( values.value );
         } else {
-          // this.db.update( employee.value.id, employee.value );
+          this.db.setPath( 'computers/'+ path );
+          console.log( 'end' )
+          console.log(values)
+          this.db.update( pc.id, values.value );
         }
       } 
     });
+  }
+
+  delete( path:string, key:string ){
+    this.db.setPath( 'computers/'+ path );
+    this.db.delete( key );
   }
 }

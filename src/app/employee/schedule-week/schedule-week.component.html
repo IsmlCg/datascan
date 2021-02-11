@@ -1,0 +1,97 @@
+<button (click)="assignScan();" mat-raised-button color="default">Scan</button>
+<button (click)="assignWerehouse();" mat-raised-button color="primary">Werehouse</button>
+<button (click)="assign();" mat-raised-button class="default">Default</button>
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <!-- Checkbox Column -->
+    <ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef>
+        <mat-checkbox (change)="$event ? masterToggle() : null"
+                      [checked]="selection.hasValue() && isAllSelected()"
+                      [indeterminate]="selection.hasValue() && !isAllSelected()"
+                      [aria-label]="checkboxLabel()">
+        </mat-checkbox>
+      </th>
+      <td mat-cell *matCellDef="let row">
+        <mat-checkbox (click)="$event.stopPropagation()"
+                      (change)="$event ? selection.toggle(row) : null"
+                      [checked]="selection.isSelected(row)"
+                      [aria-label]="checkboxLabel(row)">
+        </mat-checkbox>
+      </td>
+    </ng-container>
+
+    <!-- Employee Column -->
+    <ng-container matColumnDef="employee">
+      <th mat-header-cell *matHeaderCellDef> Employee </th>
+      <td mat-cell *matCellDef="let element;let row = index"> {{element.employee}} </td>
+    </ng-container>
+
+    <!-- monday Column -->
+    <ng-container matColumnDef="monday">
+      <th mat-header-cell *matHeaderCellDef> Monday <br> <strong>{{datesweek[0]}}</strong></th>
+      <td mat-cell *matCellDef="let element;let row = index;"
+      [ngClass]="element.monday.job" 
+      (click)= "assignWork( row, 'monday' );"> {{element.monday.date}} </td>
+    </ng-container>
+
+    <!-- tursday Column -->
+    <ng-container matColumnDef="tuesday">
+      <th mat-header-cell *matHeaderCellDef> Tuesday <br> <strong>{{datesweek[1]}}</strong> </th>
+      <td [ngClass]="element.tuesday.job" 
+      (click)= "assignWork( row, 'tuesday' );"
+      mat-cell *matCellDef="let element;let row = index;"> {{element.tuesday.date}} </td>
+    </ng-container>
+
+    <!-- wednesday Column -->
+    <ng-container matColumnDef="wednesday">
+      <th mat-header-cell *matHeaderCellDef> Wednesday <br> <strong>{{datesweek[2]}}</strong></th>
+      <td 
+        mat-cell *matCellDef="let element;let row = index;" 
+        [ngClass]="element.wednesday.job" 
+        (click)= "assignWork( row, 'wednesday' );"> {{element.wednesday.date}} </td>
+    </ng-container>
+    <!-- thursday Column -->
+    <ng-container matColumnDef="thursday">
+        <th mat-header-cell *matHeaderCellDef> Thursday <br> <strong>{{datesweek[3]}}</strong> </th>
+        <td [ngClass]="element.thursday.job" 
+        (click)= "assignWork( row, 'thursday' );"
+        mat-cell *matCellDef="let element;let row = index;"> {{element.thursday.date}} </td>
+    </ng-container>
+    <!-- friday Column -->
+    <ng-container matColumnDef="friday">
+        <th mat-header-cell *matHeaderCellDef> Friday <br> <strong>{{datesweek[4]}}</strong> </th>
+        <td [ngClass]="element.friday.job" 
+        (click)= "assignWork( row, 'friday' );"
+        mat-cell *matCellDef="let element;let row = index;"> {{element.friday.date}} </td>
+      </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="saturday">
+        <th mat-header-cell *matHeaderCellDef> Saturday <br> <strong>{{datesweek[5]}}</strong> </th>
+        <td [ngClass]="element.saturday.job" 
+        (click)= "assignWork( row, 'saturday' );"
+        mat-cell *matCellDef="let element;let row = index;"> {{element.saturday.date}} </td>
+    </ng-container>
+    <!-- Weight Column -->
+    <ng-container matColumnDef="sunday">
+        <th mat-header-cell *matHeaderCellDef> Sunday <br><strong>{{datesweek[6]}}</strong></th>
+        <td [ngClass]="element.sunday.job" 
+        (click)= "assignWork( row, 'sunday' );"
+        mat-cell *matCellDef="let element;let row = index;"> {{element.sunday.date}} </td>
+    </ng-container>
+
+    <!-- Option Column -->
+    <ng-container matColumnDef="option" >
+      <th mat-header-cell *matHeaderCellDef arrowPosition="before"> Option</th>
+      <td mat-cell *matCellDef="let element;let row = index" >  
+        <div class="button-row" >
+          <mat-slide-toggle [checked]="element.active" >Active</mat-slide-toggle>
+        </div>       
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+    (click)="selection.toggle(row)">
+    </tr>
+  </table>

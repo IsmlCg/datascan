@@ -27,7 +27,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class CrudEmployeeComponent implements OnInit {
 
-  displayedColumns: string[] = [ 'id', 'name', 'lastname', 'code', 'option' ];
+  displayedColumns: string[] = [ 'id', 'name', 'lastname', 'code', 'job', 'option' ];
   dataSource = new MatTableDataSource<PeriodicElement>( ELEMENT_DATA );
   selection = new SelectionModel<PeriodicElement>(true, []);
   
@@ -51,10 +51,12 @@ export class CrudEmployeeComponent implements OnInit {
             'name': data[ index ].name,
             'lastname': data[ index ].lastname,
             'code': data[ index ].code,
-            'active': data[ index ].active
+            'active': data[ index ].active,
+            'job': data[ index ].job,
+            'days': data[ index ].days
           }
         });
-        console.log( this.employees );
+        // console.log( this.employees );
         this.dataSource.data = this.employees;
       });
 
@@ -75,13 +77,13 @@ export class CrudEmployeeComponent implements OnInit {
       data:null
     };
     if ( row >= 0 ) {
-      dialogConfig.data = {
+        dialogConfig.data = {
         title:"Edit..!",
         data:this.employees[ row ]
       };
     }
     
-    dialogConfig.width= '50%';
+    dialogConfig.width= '100%';
     let dialogRef = this.matDialog.open( EmployeeModalComponent, dialogConfig );
 
     dialogRef.afterClosed().subscribe( employee => {

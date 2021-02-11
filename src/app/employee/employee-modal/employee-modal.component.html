@@ -1,27 +1,320 @@
 <mat-dialog-content class="mat-typography login-wrapper">
     <h1>{{data.title}}</h1>
     <form class="form">
-
+        <!-- name -->
         <mat-form-field class="full-width">
           <mat-label>Name</mat-label>
           <input matInput placeholder="Name" [(ngModel)]="employee.name" value="" name="name">
         </mat-form-field>
-
+        <!-- last name -->
         <mat-form-field class="full-width">
             <mat-label>Last name</mat-label>
             <input matInput placeholder="Last name" [(ngModel)]="employee.lastname" value="" name="lastname">
         </mat-form-field>
-
+        <!-- code -->
         <mat-form-field class="full-width">
             <mat-label>Code</mat-label>
             <input matInput placeholder="Code" [(ngModel)]="employee.code" value="" name="code">
         </mat-form-field>
-        
+        <!-- job -->
+        <mat-form-field class="full-width">
+            <mat-label>Job</mat-label>
+            <mat-select name="job" (selectionChange)="changeJob(employee.job);" [(value)]="employee.job">
+                <mat-option value ="scanning">Scanning</mat-option>
+                <mat-option value ="werehouse">Werehouse</mat-option>
+                <mat-option value ="books">Books</mat-option>            
+                <mat-option value ="delivery">Delivery</mat-option>
+
+                <mat-option value ="floor">Floor</mat-option>
+                <mat-option value ="nights">Nights</mat-option>
+                <mat-option value ="holiday">Holiday</mat-option>
+                <mat-option value ="redaction">Redaction</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <!-- checked active -->
         <mat-slide-toggle [checked]="employee.active" (change)="onChange($event)">Active or deactivate</mat-slide-toggle>
+        <br>
+        <br>
+        <!-- monday -->
+        <mat-label>Monday </mat-label>
+        <br>
+        <mat-form-field class="fourth-width">
+            <input matInput 
+                [disabled] = "(employee.days.monday.status == 'enabled')?false:true" 
+                type="time" placeholder="start" [(ngModel)]="employee.days.monday.start" 
+                name="monday-start">
+        </mat-form-field>
+        <mat-form-field class="fourth-width">
+            <input matInput 
+                [disabled] = "(employee.days.monday.status == 'enabled')?false:true" 
+                type="time" placeholder="End" [(ngModel)]="employee.days.monday.end" 
+                name="monday-end">
+        </mat-form-field>
+        <mat-form-field class="fourth-width">
+            <mat-label>Job</mat-label>
+            <mat-select name="job" 
+            [disabled] = "(employee.days.monday.status == 'enabled')?false:true"
+            [(value)]="employee.days.monday.job">
+                <mat-option value ="scanning">Scanning</mat-option>
+                <mat-option value ="werehouse">Werehouse</mat-option>
+                <mat-option value ="books">Books</mat-option>            
+                <mat-option value ="delivery">Delivery</mat-option>
+
+                <mat-option value ="floor">Floor</mat-option>
+                <mat-option value ="nights">Nights</mat-option>
+                <mat-option value ="holiday">Holiday</mat-option>
+                <mat-option value ="redaction">Redaction</mat-option>
+            </mat-select>            
+        </mat-form-field> 
+        <mat-form-field class="fourth-width">
+            <mat-label>Status</mat-label>
+            <mat-select name="monday-status" (selectionChange)="changeHours(employee.days.monday);" [(value)]="employee.days.monday.status">
+              <mat-option value ="enabled">Enabled</mat-option>
+              <mat-option value ="day-off">Day off</mat-option>
+              <mat-option value ="disabled">Disabled</mat-option>
+            </mat-select>
+        </mat-form-field> 
+        <!--  -->
+        <br>   
+        <!-- tuesday -->
+        <mat-label>Tuesday </mat-label>
+        <br>
+        <mat-form-field class="fourth-width">
+            <input matInput 
+            [disabled] = "(employee.days.tuesday.status == 'enabled')?false:true" 
+            type="time" placeholder="start" [(ngModel)]="employee.days.tuesday.start" value="" name="tuesday-start">
+        </mat-form-field>
+        <mat-form-field class="fourth-width">
+            <input matInput
+            [disabled] = "(employee.days.tuesday.status == 'enabled')?false:true" 
+            type="time" placeholder="End" [(ngModel)]="employee.days.tuesday.end" value="" name="tuesday-end">
+        </mat-form-field>
+        <mat-form-field class="fourth-width">
+            <mat-label>Job</mat-label>
+            <mat-select name="job" 
+            [disabled] = "(employee.days.tuesday.status == 'enabled')?false:true"
+            [(value)]="employee.days.tuesday.job">
+                <mat-option value ="scanning">Scanning</mat-option>
+                <mat-option value ="werehouse">Werehouse</mat-option>
+                <mat-option value ="books">Books</mat-option>            
+                <mat-option value ="delivery">Delivery</mat-option>
+
+                <mat-option value ="floor">Floor</mat-option>
+                <mat-option value ="nights">Nights</mat-option>
+                <mat-option value ="holiday">Holiday</mat-option>
+                <mat-option value ="redaction">Redaction</mat-option>
+            </mat-select>            
+        </mat-form-field> 
+        <mat-form-field class="fourth-width">
+            <mat-label>Status</mat-label>
+            <mat-select name="tuesday-status" (selectionChange)="changeHours(employee.days.tuesday);" [(value)]="employee.days.tuesday.status">
+              <mat-option value ="enabled">Enabled</mat-option>
+              <mat-option value ="day-off">Day off</mat-option>
+              <mat-option value ="disabled">Disabled</mat-option>
+            </mat-select>
+        </mat-form-field> 
+        <!--  -->
+        <br>   
+        <!-- wednesday -->
+        <mat-label>Wednesday </mat-label>
+        <br>
+        <mat-form-field class="fourth-width">
+            <input matInput
+            [disabled] = "(employee.days.wednesday.status == 'enabled')?false:true" 
+            type="time" placeholder="start" [(ngModel)]="employee.days.wednesday.start" value="" name="wednesday-start">
+        </mat-form-field>
+        <mat-form-field class="fourth-width">
+            <input matInput 
+            [disabled] = "(employee.days.wednesday.status == 'enabled')?false:true" 
+            type="time" placeholder="End" [(ngModel)]="employee.days.wednesday.end" value="" name="wednesday-end">
+        </mat-form-field>
+        <mat-form-field class="fourth-width">
+            <mat-label>Job</mat-label>
+            <mat-select name="job" 
+            [disabled] = "(employee.days.wednesday.status == 'enabled')?false:true"
+            [(value)]="employee.days.wednesday.job">
+                <mat-option value ="scanning">Scanning</mat-option>
+                <mat-option value ="werehouse">Werehouse</mat-option>
+                <mat-option value ="books">Books</mat-option>            
+                <mat-option value ="delivery">Delivery</mat-option>
+
+                <mat-option value ="floor">Floor</mat-option>
+                <mat-option value ="nights">Nights</mat-option>
+                <mat-option value ="holiday">Holiday</mat-option>
+                <mat-option value ="redaction">Redaction</mat-option>
+            </mat-select>            
+        </mat-form-field> 
+        <mat-form-field class="fourth-width">
+            <mat-label>Status</mat-label>
+            <mat-select name="wednesday-status" (selectionChange)="changeHours(employee.days.wednesday);" [(value)]="employee.days.wednesday.status">
+              <mat-option value ="enabled">Enabled</mat-option>
+              <mat-option value ="day-off">Day off</mat-option>
+              <mat-option value ="disabled">Disabled</mat-option>
+            </mat-select>
+        </mat-form-field> 
+        <!--  -->
+        <br>   
+        <!-- thursday -->
+        <mat-label>Thursday </mat-label>
+        <br>
+        <mat-form-field class="fourth-width">
+            <input matInput
+            [disabled] = "(employee.days.thursday.status == 'enabled')?false:true" 
+            type="time" placeholder="start" [(ngModel)]="employee.days.thursday.start" value="" name="thursday-start">
+        </mat-form-field>
+        <mat-form-field class="fourth-width">
+            <mat-label>thursday end</mat-label>
+            <input matInput
+            [disabled] = "(employee.days.thursday.status == 'enabled')?false:true" 
+            type="time" placeholder="End" [(ngModel)]="employee.days.thursday.end" value="" name="thursday-end">
+        </mat-form-field>
+        <mat-form-field class="fourth-width">
+            <mat-label>Job</mat-label>
+            <mat-select name="job" 
+            [disabled] = "(employee.days.thursday.status == 'enabled')?false:true"
+            [(value)]="employee.days.thursday.job">
+                <mat-option value ="scanning">Scanning</mat-option>
+                <mat-option value ="werehouse">Werehouse</mat-option>
+                <mat-option value ="books">Books</mat-option>            
+                <mat-option value ="delivery">Delivery</mat-option>
+
+                <mat-option value ="floor">Floor</mat-option>
+                <mat-option value ="nights">Nights</mat-option>
+                <mat-option value ="holiday">Holiday</mat-option>
+                <mat-option value ="redaction">Redaction</mat-option>
+            </mat-select>            
+        </mat-form-field> 
+        <mat-form-field class="fourth-width">
+            <mat-label>Status</mat-label>
+            <mat-select name="thursday-status" (selectionChange)="changeHours(employee.days.thursday);" [(value)]="employee.days.thursday.status">
+              <mat-option value ="enabled">Enabled</mat-option>
+              <mat-option value ="day-off">Day off</mat-option>
+              <mat-option value ="disabled">Disabled</mat-option>
+            </mat-select>
+        </mat-form-field> 
+        <!--  -->
+        <br>   
+        <!-- friday -->
+        <mat-label>Friday </mat-label>
+        <br>
+        <mat-form-field class="fourth-width">
+            <input matInput
+            [disabled] = "(employee.days.friday.status == 'enabled')?false:true" 
+            type="time" placeholder="start" [(ngModel)]="employee.days.friday.start" value="" name="friday-start">
+        </mat-form-field>
+        <mat-form-field class="fourth-width">
+            <mat-label>friday end</mat-label>
+            <input matInput
+            [disabled] = "(employee.days.friday.status == 'enabled')?false:true" 
+            type="time" placeholder="End" [(ngModel)]="employee.days.friday.end" value="" name="friday-end">
+        </mat-form-field>
+        <mat-form-field class="fourth-width">
+            <mat-label>Job</mat-label>
+            <mat-select name="job" 
+            [disabled] = "(employee.days.friday.status == 'enabled')?false:true"
+            [(value)]="employee.days.friday.job">
+                <mat-option value ="scanning">Scanning</mat-option>
+                <mat-option value ="werehouse">Werehouse</mat-option>
+                <mat-option value ="books">Books</mat-option>            
+                <mat-option value ="delivery">Delivery</mat-option>
+
+                <mat-option value ="floor">Floor</mat-option>
+                <mat-option value ="nights">Nights</mat-option>
+                <mat-option value ="holiday">Holiday</mat-option>
+                <mat-option value ="redaction">Redaction</mat-option>
+            </mat-select>            
+        </mat-form-field> 
+        <mat-form-field class="fourth-width">
+            <mat-label>Status</mat-label>
+            <mat-select name="friday-status" (selectionChange)="changeHours(employee.days.friday);" [(value)]="employee.days.friday.status">
+              <mat-option value ="enabled">Enabled</mat-option>
+              <mat-option value ="day-off">Day off</mat-option>
+              <mat-option value ="disabled">Disabled</mat-option>
+            </mat-select>
+        </mat-form-field> 
+        <!--  -->
+        <br>   
+        <!-- saturday -->
+        <mat-label>Saturday </mat-label>
+        <br>
+        <mat-form-field class="fourth-width">
+            <input matInput
+            [disabled] = "(employee.days.saturday.status == 'enabled')?false:true" 
+            type="time" placeholder="start" [(ngModel)]="employee.days.saturday.start" value="" name="saturday-start">
+        </mat-form-field>
+        <mat-form-field class="fourth-width">
+            <mat-label>saturday end</mat-label>
+            <input matInput
+            [disabled] = "(employee.days.saturday.status == 'enabled')?false:true"  
+            type="time" placeholder="End" [(ngModel)]="employee.days.saturday.end" value="" name="saturday-end">
+        </mat-form-field>
+        <mat-form-field class="fourth-width">
+            <mat-label>Job</mat-label>
+            <mat-select name="job" 
+            [disabled] = "(employee.days.saturday.status == 'enabled')?false:true"
+            [(value)]="employee.days.saturday.job">
+                <mat-option value ="scanning">Scanning</mat-option>
+                <mat-option value ="werehouse">Werehouse</mat-option>
+                <mat-option value ="books">Books</mat-option>            
+                <mat-option value ="delivery">Delivery</mat-option>
+
+                <mat-option value ="floor">Floor</mat-option>
+                <mat-option value ="nights">Nights</mat-option>
+                <mat-option value ="holiday">Holiday</mat-option>
+                <mat-option value ="redaction">Redaction</mat-option>
+            </mat-select>            
+        </mat-form-field> 
+        <mat-form-field class="fourth-width">
+            <mat-label>Status</mat-label>
+            <mat-select name="saturday-status" (selectionChange)="changeHours(employee.days.saturday);" [(value)]="employee.days.saturday.status">
+              <mat-option value ="enabled">Enabled</mat-option>
+              <mat-option value ="day-off">Day off</mat-option>
+              <mat-option value ="disabled">Disabled</mat-option>
+            </mat-select>
+        </mat-form-field> 
+        <!--  -->
+        <br>   
+        <!-- sunday -->
+        <mat-label>Sunday </mat-label>
+        <br>
+        <mat-form-field class="fourth-width">
+            <input matInput
+            [disabled] = "(employee.days.sunday.status == 'enabled')?false:true"  
+            type="time" placeholder="start" [(ngModel)]="employee.days.sunday.start" value="" name="sunday-start">
+        </mat-form-field>
+        <mat-form-field class="fourth-width">
+            <input matInput
+            [disabled] = "(employee.days.sunday.status == 'enabled')?false:true"  
+            type="time" placeholder="End" [(ngModel)]="employee.days.sunday.end" value="" name="sunday-end">
+        </mat-form-field>
+        <mat-form-field class="fourth-width">
+            <mat-label>Job</mat-label>
+            <mat-select name="job" 
+            [disabled] = "(employee.days.sunday.status == 'enabled')?false:true"
+            [(value)]="employee.days.sunday.job">
+                <mat-option value ="scanning">Scanning</mat-option>
+                <mat-option value ="werehouse">Werehouse</mat-option>
+                <mat-option value ="books">Books</mat-option>            
+                <mat-option value ="delivery">Delivery</mat-option>
+
+                <mat-option value ="floor">Floor</mat-option>
+                <mat-option value ="nights">Nights</mat-option>
+                <mat-option value ="holiday">Holiday</mat-option>
+                <mat-option value ="redaction">Redaction</mat-option>
+            </mat-select>            
+        </mat-form-field> 
+        <mat-form-field class="fourth-width">
+            <mat-label>Status</mat-label>
+            <mat-select name="sunday-status" (selectionChange)="changeHours(employee.days.sunday);" [(value)]="employee.days.sunday.status">
+              <mat-option value ="enabled">Enabled</mat-option>
+              <mat-option value ="day-off">Day off</mat-option>
+              <mat-option value ="disabled">Disabled</mat-option>
+            </mat-select>
+        </mat-form-field> 
+        <!--  -->
     </form>
-      
 </mat-dialog-content>
 <mat-dialog-actions align="end">
     <button mat-raised-button color="warn" (click)="close()" >Cancel</button>
-    <button mat-raised-button color="primary" (click)="save()" >Add</button>
+    <button mat-raised-button color="primary" (click)="save()" >Save</button>
 </mat-dialog-actions>

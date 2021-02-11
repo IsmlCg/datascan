@@ -10,20 +10,29 @@ import { Computer } from './Computer';
   styleUrls: ['./staff-schedule-modal.component.css']
 })
 export class StaffScheduleModalComponent implements OnInit {
-  employee: Employee = {
-                  name:'',
-                  lastname:'',
-                  code:'',
-                  id:'',
-                  active:true
-                };
+  employee = {
+            name:'',
+            lastname:'',
+            code:'',
+            id:'',
+            active:true
+          };
   computer:Computer={
     computernumber:0,
     rownumber:1,
     position:"",
     employee:this.employee
   };
-  constructor( public dialogRef: MatDialogRef<StaffScheduleModalComponent>, @Inject(MAT_DIALOG_DATA) public data: any ) { }
+  isnew:boolean = true;
+
+  constructor( public dialogRef: MatDialogRef<StaffScheduleModalComponent>, @Inject(MAT_DIALOG_DATA) public data: any ) {
+    if ( data.data != null ) {
+      this.computer.computernumber = data.data.computernumber;
+      this.computer.position = data.data.position;
+      this.computer.rownumber = data.data.rownumber;
+      this.isnew = false;
+    }
+   }
 
   ngOnInit(): void {
   }
@@ -36,6 +45,16 @@ export class StaffScheduleModalComponent implements OnInit {
   save() {
     
     console.log(this.computer)
-    this.dialogRef.close( {isnew:true, value:this.computer} );
+    if ( this.isnew ) {
+      this.dialogRef.close( {isnew:this.isnew, value:this.computer} );  
+    }else{
+      
+      let data = {
+        computernumber :this.computer.computernumber,
+        position :this.computer.position  
+      }
+      this.dialogRef.close( {isnew:this.isnew, value:data } );
+    }
+    
   }
 }

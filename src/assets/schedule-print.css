@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+.content { 
+  padding: 16px; 
+}
+
+.row-employee-content{
+  background-color: cadetblue;
+  border-radius: 4px;
+}
+
+.employee-box {
+  padding: 8px 15px;
+  border-bottom: solid 1px #ccc;
+  color: rgba(0, 0, 0, 0.87);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  cursor: move;
+  background: white;
+  font-size: 13px;
+}
+.font-size{
+    font-size: 20px;
+}
+/* Create two equal columns that floats next to each other */
+.column-pc {
+    float: left;
+    width: 100%;
+    margin: 20px;
+    height: 80%; /* Should be removed. Only for demonstration */
+  }
+  
+  /* Clear floats after the columns */
+  .row-pc:after {
+    width: 100%;  
+    content: "";
+    display: table;
+    clear: both;
+  }

@@ -57,7 +57,9 @@ import { StaffScheduleComponent } from './employee/staff-schedule/staff-schedule
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { StaffScheduleModalComponent } from './employee/staff-schedule-modal/staff-schedule-modal.component';
 import { PrintScheduleComponent } from './dashboard/print-schedule/print-schedule.component';
-
+import { NgxPrinterModule } from 'ngx-printer';
+import { NgxPrintModule } from 'ngx-print';
+import { ScheduleWeekComponent } from './employee/schedule-week/schedule-week.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +70,8 @@ import { PrintScheduleComponent } from './dashboard/print-schedule/print-schedul
     EmployeeModalComponent,
     StaffScheduleComponent,
     StaffScheduleModalComponent,
-    PrintScheduleComponent
+    PrintScheduleComponent,
+    ScheduleWeekComponent
   ],
   imports: [
     BrowserModule,
@@ -118,10 +121,8 @@ import { PrintScheduleComponent } from './dashboard/print-schedule/print-schedul
   AngularFireModule.initializeApp(environment.firebaseConfig),
   AngularFirestoreModule,
   AngularFireDatabaseModule,
-
-  PrintScheduleComponent,
-
-
+  NgxPrinterModule.forRoot({printOpenWindow: true}),
+  NgxPrintModule
   ],
   providers: [ CrudService ],
   bootstrap: [AppComponent],
